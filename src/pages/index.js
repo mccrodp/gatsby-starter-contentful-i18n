@@ -40,41 +40,28 @@ const Product = ({ node }) => (
   </div>
 )
 
-class IndexPage extends React.Component {
+class IndexPage extends React.PureComponent {
+  constructor(args) {
+    super(args);
+
+    // Skip build, Browsers only
+    if (typeof window !== 'undefined') {
+      const { langs, defaultLangKey } = args.data.site.siteMetadata.languages;
+      const langKey = getUserLangKey(langs, defaultLangKey);
+      const homeUrl = withPrefix(`/${langKey}/`);
+
+      // I don`t think this is the best solution
+      // I would like to use Gatsby Redirects like:
+      // https://github.com/gatsbyjs/gatsby/tree/master/examples/using-redirects
+      // But Gatsby Redirects are static, they need to be specified at build time,
+      // This redirect is dynamic, It needs to know the user browser language.
+      // Any ideias? Join the issue: https://github.com/angeloocana/gatsby-starter-default-i18n/issues/4
+      window.___history.replace(homeUrl);
+    }
+  }
+
   render() {
-    const usProductEdges = this.props.data.us.edges
-    const deProductEdges = this.props.data.german.edges
-    return (
-      <div style={{ marginBottom: rhythm(2) }}>
-        <h2>Gatsby's integration with the Contentful Image API</h2>
-        <Link to="/image-api/">See examples</Link>
-        <br />
-        <br />
-        <br />
-        <h2>Localization</h2>
-        <p>
-          The <code>gatsby-source-contentful</code> plugin offers full support
-          for Contentful's localization features. Our sample space includes
-          products localized into both English and German.
-        </p>
-        <p>
-          An entry and asset node are created for each locale following fallback
-          rules for missing localization. In addition, each node has an
-          additional field added, <code>node_locale</code> so you can select for
-          nodes from a single locale
-        </p>
-        <h3>en-US</h3>
-        {usProductEdges.map(({ node }, i) => (
-          <Product node={node} key={node.id} />
-        ))}
-        <br />
-        <br />
-        <h3>de</h3>
-        {deProductEdges.map(({ node }, i) => (
-          <Product node={node} key={node.id} />
-        ))}
-      </div>
-    )
+    return (<div />);
   }
 }
 
