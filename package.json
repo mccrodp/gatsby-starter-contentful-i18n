@@ -16,7 +16,16 @@
     "react-typography": "^0.15.0",
     "slash": "^1.0.0",
     "typography": "^0.15.8",
-    "typography-breakpoint-constants": "^0.14.0"
+    "typography-breakpoint-constants": "^0.14.0",
+    "gatsby-plugin-i18n": "^0.3.3",
+    "gatsby-plugin-react-helmet": "^1.0.5",
+    "intl": "^1.2.5",
+    "react-intl": "^2.4.0"
+  },
+  "devDependencies": {
+    "codecov": "^3.0.0",
+    "jest": "^22.0.4",
+    "prettier": "^1.7.4"
   },
   "keywords": [
     "gatsby"

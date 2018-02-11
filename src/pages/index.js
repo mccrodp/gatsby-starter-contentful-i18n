@@ -3,6 +3,9 @@ import Link from "gatsby-link"
 import * as PropTypes from "prop-types"
 import { rhythm } from "../utils/typography"
 import Img from "gatsby-image"
+import graphql from 'graphql';
+import { getUserLangKey } from 'ptz-i18n';
+import { withPrefix } from "gatsby-link";
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -108,6 +111,14 @@ export const pageQuery = graphql`
               ...GatsbyContentfulResolutions
             }
           }
+        }
+      }
+    }
+    site{
+      siteMetadata{
+        languages {
+          defaultLangKey
+          langs
         }
       }
     }
