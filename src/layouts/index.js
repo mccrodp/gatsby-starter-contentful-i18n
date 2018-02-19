@@ -6,7 +6,6 @@ import { getCurrentLangKey, getLangs, getUrlForLang } from 'ptz-i18n';
 import { IntlProvider } from 'react-intl';
 import { rhythm } from "../utils/typography"
 import Link from "gatsby-link"
-import 'react-intl/locale-data';
 import 'intl';
 
 const TemplateWrapper = ({ children, data, location, i18nMessages }) => {
