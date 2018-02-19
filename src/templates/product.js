@@ -45,7 +45,7 @@ class ProductTemplate extends React.Component {
             <ul>
               {categories.map((category, i) => (
                 <li key={i}>
-                  <Link key={i} to={`/categories/${category.id}`}>
+                  <Link key={i} to={`/${category.node_locale}/categories/${category.id.substr(0, 23)}`}>
                     {category.title.title}
                   </Link>
                 </li>
@@ -90,6 +90,7 @@ export const pageQuery = graphql`
       }
       categories {
         id
+        node_locale
         title {
           title
         }

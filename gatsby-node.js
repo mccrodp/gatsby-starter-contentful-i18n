@@ -38,6 +38,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         // We want to create a detailed page for each
         // product node. We'll just use the Contentful id for the slug.
         _.each(result.data.allContentfulProduct.edges, edge => {
+          // We need a common ID to cycle between locales.
+          const commonId = edge.node.id.substr(0, 23)
           // Gatsby uses Redux to manage its internal state.
           // Plugins and sites can use functions like "createPage"
           // to interact with Gatsby.
@@ -46,10 +48,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             // as a template component. The `context` is
             // optional but is often necessary so the template
             // can query data specific to each page.
-            path: `${edge.node.node_locale}/products/${edge.node.id}/`,
+            path: `/${edge.node.node_locale}/products/${commonId}/`,
             component: slash(productTemplate),
             context: {
-              id: edge.node.id,
+              id: edge.node.id
             },
           })
         })
@@ -78,6 +80,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           // We want to create a detailed page for each
           // category node. We'll just use the Contentful id for the slug.
           _.each(result.data.allContentfulCategory.edges, edge => {
+            // We need a common ID to cycle between locales.
+            const commonId = edge.node.id.substr(0, 23)
             // Gatsby uses Redux to manage its internal state.
             // Plugins and sites can use functions like "createPage"
             // to interact with Gatsby.
@@ -86,10 +90,10 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               // as a template component. The `context` is
               // optional but is often necessary so the template
               // can query data specific to each page.
-              path: `${edge.node.node_locale}/categories/${edge.node.id}/`,
+              path: `/${edge.node.node_locale}/categories/${commonId}/`,
               component: slash(categoryTemplate),
               context: {
-                id: edge.node.id,
+                id: edge.node.id
               },
             })
           })
