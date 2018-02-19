@@ -12,7 +12,7 @@ const Product = ({ node }) => (
   <div>
     <Link
       style={{ color: `inherit`, textDecoration: `none` }}
-      to={`/products/${node.id}/`}
+      to={`${node.node_locale}/products/${node.id}/`}
     >
       <div
         style={{
@@ -85,6 +85,7 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          node_locale
           productName {
             productName
           }
@@ -100,6 +101,7 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          node_locale
           productName {
             productName
           }

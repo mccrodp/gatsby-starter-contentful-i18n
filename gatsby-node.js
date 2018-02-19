@@ -21,6 +21,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             edges {
               node {
                 id
+                node_locale
               }
             }
           }
@@ -45,7 +46,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             // as a template component. The `context` is
             // optional but is often necessary so the template
             // can query data specific to each page.
-            path: `/products/${edge.node.id}/`,
+            path: `${edge.node.node_locale}/products/${edge.node.id}/`,
             component: slash(productTemplate),
             context: {
               id: edge.node.id,
@@ -61,6 +62,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 edges {
                   node {
                     id
+                    node_locale
                   }
                 }
               }
@@ -84,7 +86,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               // as a template component. The `context` is
               // optional but is often necessary so the template
               // can query data specific to each page.
-              path: `/categories/${edge.node.id}/`,
+              path: `${edge.node.node_locale}/categories/${edge.node.id}/`,
               component: slash(categoryTemplate),
               context: {
                 id: edge.node.id,
