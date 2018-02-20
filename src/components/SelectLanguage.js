@@ -14,8 +14,6 @@ const SelectLanguage = (props) => {
     </Link>
   );
 
-  console.log(props)
-
   return (
     <section>
       <header style={{
