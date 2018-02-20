@@ -1,6 +1,5 @@
-# Using Contentful
+# Using Contentful with i18n plugin
 
-https://using-contentful.netlify.com
+To build on the [Using Contentful](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-contentful) example site using the [i18n community plugin](https://github.com/angeloocana/gatsby-plugin-i18n), this starter repo shows a language switcher and the bilingual content only for the selected language (codes en-US and de).
 
-Example site that demonstrates how to build Gatsby sites that pull data from the
-[Contentful CMS API](https://www.contentful.com/).
+Please take a look at the [issue queue](https://github.com/mccrodp/gatsby-contentful-i18n) to help out and feel free to submit PRs :)
