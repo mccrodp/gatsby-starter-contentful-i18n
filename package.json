@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-example-using-contentful",
+  "name": "gatsby-starter-contentful-i18n",
   "private": true,
-  "description": "Gatsby example site using the Contentful source plugin",
+  "description": "Gatsby example site using the Contentful source plugin and i18n",
   "version": "1.0.0",
-  "author": "Marcus Ericsson <mericsson@gmail.com> (mericsson.com)",
+  "author": "Paul McCrodden <paul.mccrodden@x-team.com> (paulmccrodden.com)",
   "dependencies": {
     "gatsby": "latest",
     "gatsby-image": "^1.0.5",
