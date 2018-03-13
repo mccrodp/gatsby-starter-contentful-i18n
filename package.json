@@ -13,6 +13,7 @@
     "gatsby-plugin-offline": "latest",
     "gatsby-source-contentful": "latest",
     "gatsby-transformer-remark": "latest",
+    "gatsby-module-loader": "latest",
     "lodash": "^4.16.4",
     "react-typography": "^0.15.0",
     "slash": "^1.0.0",
