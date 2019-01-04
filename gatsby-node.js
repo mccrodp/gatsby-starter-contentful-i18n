@@ -21,6 +21,7 @@ exports.createPages = ({ graphql, actions }) => {
             edges {
               node {
                 id
+                contentful_id
                 node_locale
               }
             }
@@ -39,7 +40,7 @@ exports.createPages = ({ graphql, actions }) => {
         // product node. We'll just use the Contentful id for the slug.
         _.each(result.data.allContentfulProduct.edges, edge => {
           // We need a common ID to cycle between locales.
-          const commonId = edge.node.id.substr(0, 23)
+          const commonId = edge.node.contentful_id
           // Gatsby uses Redux to manage its internal state.
           // Plugins and sites can use functions like "createPage"
           // to interact with Gatsby.
@@ -52,6 +53,7 @@ exports.createPages = ({ graphql, actions }) => {
             component: slash(productTemplate),
             context: {
               id: edge.node.id,
+              contentful_id:  edge.node.contentful_id,
             },
           })
         })
@@ -64,6 +66,7 @@ exports.createPages = ({ graphql, actions }) => {
                 edges {
                   node {
                     id
+                    contentful_id
                     node_locale
                   }
                 }
@@ -81,7 +84,7 @@ exports.createPages = ({ graphql, actions }) => {
           // category node. We'll just use the Contentful id for the slug.
           _.each(result.data.allContentfulCategory.edges, edge => {
             // We need a common ID to cycle between locales.
-            const commonId = edge.node.id.substr(0, 23)
+            const commonId = edge.node.contentful_id
             // Gatsby uses Redux to manage its internal state.
             // Plugins and sites can use functions like "createPage"
             // to interact with Gatsby.
@@ -94,6 +97,7 @@ exports.createPages = ({ graphql, actions }) => {
               component: slash(categoryTemplate),
               context: {
                 id: edge.node.id,
+                contentful_id:  edge.node.contentful_id,
               },
             })
           })

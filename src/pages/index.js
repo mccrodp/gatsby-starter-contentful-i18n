@@ -1,6 +1,7 @@
 import React from 'react';
 import { getUserLangKey } from 'ptz-i18n';
 import { withPrefix } from "gatsby-link";
+import { graphql } from 'gatsby'
 
 class RedirectIndex extends React.PureComponent {
   constructor(args) {

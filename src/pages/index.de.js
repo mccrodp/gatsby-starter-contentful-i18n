@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "gatsby-link"
+import { graphql } from 'gatsby'
 import * as PropTypes from "prop-types"
 import { rhythm } from "../utils/typography"
 import Img from "gatsby-image"
@@ -25,7 +26,7 @@ const Product = ({ node }) => (
   <div>
     <Link
       style={{ color: `inherit`, textDecoration: `none` }}
-      to={`/${node.node_locale}/products/${node.id.substr(0, 23)}/`}
+      to={`/${node.node_locale}/products/${node.id.contentful_id}/`}
     >
       <div
         style={{
@@ -61,6 +62,7 @@ class IndexPage extends React.Component {
     // at the moment this assumes that langKey will provide us
     // with the appropriate language code
     const i18nMessages = require(`../data/messages/${langKey}`);
+
     const deProductEdges = this.props.data.german.edges
     return (
       <div>
@@ -111,11 +113,6 @@ class IndexPage extends React.Component {
           </div>
         </IntlProvider>
         <div style={{ marginBottom: rhythm(2) }}>
-          <h2>Gatsby's integration with the Contentful Image API</h2>
-          <Link to="/image-api/">See examples</Link>
-          <br />
-          <br />
-          <br />
           <h2>Localization</h2>
           <p>
             The <code>gatsby-source-contentful</code> plugin offers full support
@@ -156,6 +153,7 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          contentful_id
           node_locale
           productName {
             productName
