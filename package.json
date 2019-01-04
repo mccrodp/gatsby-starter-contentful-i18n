@@ -1,0 +1,39 @@
+{
+  "name": "gatsby-starter-contentful-i18n",
+  "private": true,
+  "description": "Gatsby example site using the Contentful source plugin and i18n",
+  "version": "2.0.0",
+  "author": "Paul McCrodden <paul.mccrodden@x-team.com> (paulmccrodden.com)",
+  "dependencies": {
+    "gatsby": "^2.0.0",
+    "gatsby-image": "^2.0.5",
+    "gatsby-plugin-google-analytics": "^2.0.5",
+    "gatsby-plugin-i18n": "^0.4.2",
+    "gatsby-plugin-offline": "^2.0.5",
+    "gatsby-plugin-react-helmet": "^3.0.5",
+    "gatsby-plugin-typography": "^2.2.0",
+    "gatsby-source-contentful": "^2.0.1",
+    "gatsby-transformer-remark": "^2.1.1",
+    "lodash": "^4.17.10",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-helmet": "^5.2.0",
+    "react-typography": "^0.16.3",
+    "slash": "^2.0.0",
+    "typography": "^0.16.7",
+    "typography-breakpoint-constants": "^0.15.0"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "main": "n/a",
+  "resolutions": {
+    "contentful": "6.1.0"
+  },
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "start": "gatsby serve"
+  }
+}
