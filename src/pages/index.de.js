@@ -26,7 +26,7 @@ const Product = ({ node }) => (
   <div>
     <Link
       style={{ color: `inherit`, textDecoration: `none` }}
-      to={`/${node.node_locale}/products/${node.id.contentful_id}/`}
+      to={`/${node.node_locale}/products/${node.contentful_id}/`}
     >
       <div
         style={{
