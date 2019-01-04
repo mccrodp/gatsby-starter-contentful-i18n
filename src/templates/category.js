@@ -23,7 +23,8 @@ const propTypes = {
 
 class CategoryTemplate extends React.Component {
   render() {
-    const url = location.pathname;
+    const url = '/';
+    if (typeof window !== 'undefined') url = location.pathname;
     const { langs, defaultLangKey } = this.props.data.site.siteMetadata.languages;
     const langKey = getCurrentLangKey(langs, defaultLangKey, url);
     const homeLink = `/${langKey}/`;
