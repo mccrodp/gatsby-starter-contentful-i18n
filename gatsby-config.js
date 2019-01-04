@@ -3,6 +3,7 @@ const languages = require('./src/data/languages');
 module.exports = {
   siteMetadata: {
     title: `Gatsby with Contentful`,
+    languages
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

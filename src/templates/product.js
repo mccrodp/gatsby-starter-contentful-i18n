@@ -2,7 +2,6 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
-import Layout from "../layouts"
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -20,14 +19,14 @@ class ProductTemplate extends React.Component {
       categories,
     } = product
     return (
-      <Layout>
+      <div>
         <div
           style={{
             display: `flex`,
             alignItems: `center`,
           }}
         >
-          <Img fixed={image[0].fixed} />
+          <Img resolutions={image[0].resolutions} />
           <h4>{productName}</h4>
         </div>
         <h1>{productName}</h1>
@@ -44,7 +43,7 @@ class ProductTemplate extends React.Component {
             <ul>
               {categories.map((category, i) => (
                 <li key={i}>
-                  <Link key={i} to={`/categories/${category.id}`}>
+                  <Link key={i} to={`/${category.node_locale}/categories/${category.id.substr(0, 23)}`}>
                     {category.title.title}
                   </Link>
                 </li>
@@ -52,7 +51,7 @@ class ProductTemplate extends React.Component {
             </ul>
           </div>
         </div>
-      </Layout>
+      </div>
     )
   }
 }
@@ -62,7 +61,7 @@ ProductTemplate.propTypes = propTypes
 export default ProductTemplate
 
 export const pageQuery = graphql`
-  query($id: String!) {
+  query productQuery($id: String!) {
     contentfulProduct(id: { eq: $id }) {
       productName {
         productName
@@ -74,7 +73,7 @@ export const pageQuery = graphql`
       }
       price
       image {
-        fixed(width: 50, height: 50) {
+        resolutions(width: 50, height: 50) {
           base64
           src
           srcSet
@@ -89,6 +88,7 @@ export const pageQuery = graphql`
       }
       categories {
         id
+        node_locale
         title {
           title
         }

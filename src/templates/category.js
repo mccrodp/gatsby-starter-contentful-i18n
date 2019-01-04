@@ -2,7 +2,6 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
-import Layout from "../layouts"
 
 import { rhythm } from "../utils/typography"
 
@@ -13,14 +12,10 @@ const propTypes = {
 class CategoryTemplate extends React.Component {
   render() {
     const category = this.props.data.contentfulCategory
-    const {
-      title: { title },
-      product,
-      icon,
-    } = category
-    const iconImg = icon.fixed
+    const { title: { title }, product, icon } = category
+    const iconImg = icon.resolutions
     return (
-      <Layout>
+      <div>
         <div
           style={{
             display: `flex`,
@@ -34,7 +29,7 @@ class CategoryTemplate extends React.Component {
               width: iconImg.width,
               marginRight: rhythm(1 / 2),
             }}
-            fixed={iconImg}
+            resolutions={iconImg}
           />
           <h4 style={{ marginBottom: 0 }}>{title}</h4>
         </div>
@@ -45,14 +40,14 @@ class CategoryTemplate extends React.Component {
             {product &&
               product.map((p, i) => (
                 <li key={i}>
-                  <Link to={`/products/${p.id}`}>
+                  <Link to={`/${p.node_locale}/products/${p.id.substr(0, 23)}`}>
                     {p.productName.productName}
                   </Link>
                 </li>
               ))}
           </ul>
         </div>
-      </Layout>
+      </div>
     )
   }
 }
@@ -62,13 +57,13 @@ CategoryTemplate.propTypes = propTypes
 export default CategoryTemplate
 
 export const pageQuery = graphql`
-  query($id: String!) {
+  query categoryQuery($id: String!) {
     contentfulCategory(id: { eq: $id }) {
       title {
         title
       }
       icon {
-        fixed(width: 75) {
+        resolutions(width: 75) {
           base64
           src
           srcSet
@@ -78,6 +73,7 @@ export const pageQuery = graphql`
       }
       product {
         id
+        node_locale
         productName {
           productName
         }
