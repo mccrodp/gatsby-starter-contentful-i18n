@@ -54,7 +54,7 @@ const Product = ({ node }) => (
 
 class IndexPage extends React.Component {
   render() {
-    const url = '/';
+    var url = '/';
     if (typeof window !== 'undefined') url = location.pathname;
     const { langs, defaultLangKey } = this.props.data.site.siteMetadata.languages;
     const langKey = getCurrentLangKey(langs, defaultLangKey, url);
