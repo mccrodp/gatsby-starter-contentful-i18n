@@ -11,11 +11,11 @@ import 'intl';
 
 import en from 'react-intl/locale-data/en';
 import 'intl/locale-data/jsonp/en';
-import de from 'react-intl/locale-data/de';
-import 'intl/locale-data/jsonp/de';
+import it from 'react-intl/locale-data/it';
+import 'intl/locale-data/jsonp/it';
 
 // add concatenated locale data
-addLocaleData([...en, ...de]);
+addLocaleData([...en, ...it]);
 
 class TemplateWrapper extends Component {
   constructor(props) {
