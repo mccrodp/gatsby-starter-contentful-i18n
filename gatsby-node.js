@@ -1,109 +1,88 @@
-const _ = require(`lodash`)
-const Promise = require(`bluebird`)
-const path = require(`path`)
-const slash = require(`slash`)
+const _ = require('lodash')
+const path = require('path')
+const { createFilePath } = require('gatsby-source-filesystem')
+const { fmImagesToRelative } = require('gatsby-remark-relative-images')
 
-// Implement the Gatsby API “createPages”. This is
-// called after the Gatsby bootstrap is finished so you have
-// access to any information necessary to programmatically
-// create pages.
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
-  return new Promise((resolve, reject) => {
-    // The “graphql” function allows us to run arbitrary
-    // queries against the local Contentful graphql schema. Think of
-    // it like the site has a built-in database constructed
-    // from the fetched data that you can run queries against.
-    graphql(
-      `
-        {
-          allContentfulProduct(limit: 1000) {
-            edges {
-              node {
-                id
-                contentful_id
-                node_locale
-              }
+
+  return graphql(`
+    {
+      allMarkdownRemark(limit: 1000) {
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+            frontmatter {
+              tags
+              templateKey
+              nameSlug
             }
           }
         }
-      `
-    )
-      .then(result => {
-        if (result.errors) {
-          reject(result.errors)
-        }
+      }
+    }
+  `).then(result => {
+    if (result.errors) {
+      result.errors.forEach(e => console.error(e.toString()))
+      return Promise.reject(result.errors)
+    }
 
-        // Create Product pages
-        const productTemplate = path.resolve(`./src/templates/product.js`)
-        // We want to create a detailed page for each
-        // product node. We'll just use the Contentful id for the slug.
-        _.each(result.data.allContentfulProduct.edges, edge => {
-          // We need a common ID to cycle between locales.
-          const commonId = edge.node.contentful_id
-          // Gatsby uses Redux to manage its internal state.
-          // Plugins and sites can use functions like "createPage"
-          // to interact with Gatsby.
-          createPage({
-            // Each page is required to have a `path` as well
-            // as a template component. The `context` is
-            // optional but is often necessary so the template
-            // can query data specific to each page.
-            path: `/${edge.node.node_locale}/products/${commonId}/`,
-            component: slash(productTemplate),
-            context: {
-              id: edge.node.id,
-              contentful_id:  edge.node.contentful_id,
-            },
-          })
-        })
+    const posts = result.data.allMarkdownRemark.edges
+
+    posts.forEach(edge => {
+      const id = edge.node.id
+      createPage({
+        path: edge.node.fields.slug,
+        tags: edge.node.frontmatter.tags,
+        component: path.resolve(
+          `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
+        ),
+        // additional data can be passed via context
+        context: {
+          id,
+        },
       })
-      .then(() => {
-        graphql(
-          `
-            {
-              allContentfulCategory(limit: 1000) {
-                edges {
-                  node {
-                    id
-                    contentful_id
-                    node_locale
-                  }
-                }
-              }
-            }
-          `
-        ).then(result => {
-          if (result.errors) {
-            reject(result.errors)
-          }
+    })
 
-          // Create Category pages
-          const categoryTemplate = path.resolve(`./src/templates/category.js`)
-          // We want to create a detailed page for each
-          // category node. We'll just use the Contentful id for the slug.
-          _.each(result.data.allContentfulCategory.edges, edge => {
-            // We need a common ID to cycle between locales.
-            const commonId = edge.node.contentful_id
-            // Gatsby uses Redux to manage its internal state.
-            // Plugins and sites can use functions like "createPage"
-            // to interact with Gatsby.
-            createPage({
-              // Each page is required to have a `path` as well
-              // as a template component. The `context` is
-              // optional but is often necessary so the template
-              // can query data specific to each page.
-              path: `/${edge.node.node_locale}/categories/${commonId}/`,
-              component: slash(categoryTemplate),
-              context: {
-                id: edge.node.id,
-                contentful_id:  edge.node.contentful_id,
-              },
-            })
-          })
+    // Tag pages:
+    let tags = []
+    // Iterate through each post, putting all found tags into `tags`
+    posts.forEach(edge => {
+      if (_.get(edge, `node.frontmatter.tags`)) {
+        tags = tags.concat(edge.node.frontmatter.tags)
+      }
+    })
+    // Eliminate duplicate tags
+    tags = _.uniq(tags)
 
-          resolve()
-        })
+    // Make tag pages
+    tags.forEach(tag => {
+      const tagPath = `/tags/${_.kebabCase(tag)}/`
+
+      createPage({
+        path: tagPath,
+        component: path.resolve(`src/templates/tags.js`),
+        context: {
+          tag,
+        },
       })
+    })
   })
+}
+
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
+  fmImagesToRelative(node) // convert image paths for gatsby images
+
+  if (node.internal.type === `MarkdownRemark`) {
+    const value = createFilePath({ node, getNode })
+    createNodeField({
+      name: `slug`,
+      node,
+      value,
+    })
+  }
 }
