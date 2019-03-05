@@ -15,7 +15,7 @@ const Product = ({ node }) => (
   <div>
     <Link
       style={{ color: `inherit`, textDecoration: `none` }}
-      to={`/${node.node_locale}/products/${node.contentful_id}/`}
+      to={`/${node.id}/products/${node.frontmatter.nameSlug}/`}
     >
       <div
         style={{
@@ -70,19 +70,18 @@ export const pageQuery = graphql`
         }
       }
     }
-    us: allContentfulProduct(filter: { node_locale: { eq: "en-US" } }) {
+    us: allMarkdownRemark(filter:  { frontmatter: { lang: "en" } }) {
       edges {
         node {
           id
-          contentful_id
-          node_locale
-          productName {
-            productName
+          fields {
+            slug
           }
-          image {
-            resolutions(width: 75) {
-              ...GatsbyContentfulResolutions
-            }
+          frontmatter {
+            tags
+            templateKey
+            nameSlug
+            lang
           }
         }
       }

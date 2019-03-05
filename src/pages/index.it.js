@@ -14,7 +14,7 @@ const Product = ({ node }) => (
   <div>
     <Link
       style={{ color: `inherit`, textDecoration: `none` }}
-      to={`/${node.node_locale}/products/${node.contentful_id}/`}
+      to={`/${node.id}/products/${node.frontmatter.nameSlug}/`}
     >
       <div
         style={{
@@ -41,15 +41,15 @@ const Product = ({ node }) => (
 
 class IndexPage extends React.Component {
   render() {
-    var deProductEdges = [];
+    var itProductEdges = [];
     if (this.props.data.german !== null) {
-      deProductEdges = this.props.data.german.edges
+      itProductEdges = this.props.data.german.edges
     }
     return (
       <Layout data={this.props.data} location={this.props.location}>
         <div style={{ marginBottom: rhythm(2) }}>
           <h3>it</h3>
-          {deProductEdges.map(({ node }, i) => (
+          {itProductEdges.map(({ node }, i) => (
             <Product node={node} key={node.id} />
           ))}
         </div>
@@ -72,19 +72,18 @@ export const pageQuery = graphql`
         }
       }
     }
-    german: allContentfulProduct(filter: { node_locale: { eq: "de" } }) {
+    german: allMarkdownRemark(filter: { frontmatter: { lang: {eq: "it"} } }) {
       edges {
         node {
           id
-          contentful_id
-          node_locale
-          productName {
-            productName
+          fields {
+            slug
           }
-          image {
-            resolutions(width: 75) {
-              ...GatsbyContentfulResolutions
-            }
+          frontmatter {
+            tags
+            templateKey
+            nameSlug
+            lang
           }
         }
       }

@@ -19,6 +19,7 @@ exports.createPages = ({ actions, graphql }) => {
               tags
               templateKey
               nameSlug
+              lang
             }
           }
         }
@@ -32,7 +33,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     const posts = result.data.allMarkdownRemark.edges
 
-    posts.forEach(edge => {
+    posts.forEach(edge => {frontmatter: {eq: "it" }
       const id = edge.node.id
       createPage({
         path: edge.node.fields.slug,
