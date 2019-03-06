@@ -1,7 +1,7 @@
 ---
 title: "pagina general"
 description: "qualche contenuto"
-templateKey: pagetest
+templateKey: artworks
 nameSlug: pagina-home-it
 tags: web
 lang: it
