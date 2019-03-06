@@ -1,13 +1,13 @@
 ---
-title: "pagina test"
+title: "pagina general"
 description: "qualche contenuto"
-templateKey: test
+templateKey: general
 nameSlug: pagina-general-it
 tags: web
 lang: it
 date: "05-03-2019"
-path: /test
-slug: /test
+path: /general
+slug: /general
 ---
 
 Hello! ciao!

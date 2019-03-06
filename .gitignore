@@ -8,4 +8,5 @@ node_modules/
 .gatsby-context.js
 .intermediate-representation/
 .env
+.package-lock.json
 public/
