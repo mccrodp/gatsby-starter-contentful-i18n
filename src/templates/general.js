@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import Img from "gatsby-image"
 import { rhythm } from "../utils/typography"
 
-import Layout from "../components/layout"
+import Layout from "../components/Layout"
 import Content, { HTMLContent } from '../components/Content'
 
 const propTypes = {
