@@ -42,8 +42,8 @@ const Product = ({ node }) => (
 class IndexPage extends React.Component {
   render() {
     var itProductEdges = [];
-    if (this.props.data.german !== null) {
-      itProductEdges = this.props.data.german.edges
+    if (this.props.data.italian !== null) {
+      itProductEdges = this.props.data.italian.edges
     }
     return (
       <Layout data={this.props.data} location={this.props.location}>
@@ -72,7 +72,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    german: allMarkdownRemark {
+    italian: allMarkdownRemark {
       edges {
         node {
           id
