@@ -39,7 +39,7 @@ const Product = ({ node }) => (
   </div>
 )
 
-class IndexPage extends React.Component {
+class ArtworksPage extends React.Component {
   render() {
     var itProductEdges = [];
     if (this.props.data.german !== null) {
@@ -52,18 +52,19 @@ class IndexPage extends React.Component {
           {itProductEdges.map(({ node }, i) => (
             <Product node={node} key={node.id} />
           ))}
+
         </div>
       </Layout>
     )
   }
 }
 
-IndexPage.propTypes = propTypes
+ArtworksPage.propTypes = propTypes
 
-export default IndexPage
+export default ArtworksPage
 
 export const pageQuery = graphql`
-  query PageTestQuery {
+  query ArtworksQuery {
     site {
       siteMetadata {
         languages {
@@ -75,6 +76,7 @@ export const pageQuery = graphql`
     german: allMarkdownRemark {
       edges {
         node {
+          html
           id
           fields {
             slug
