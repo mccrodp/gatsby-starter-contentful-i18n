@@ -27,14 +27,14 @@ const Product = ({ node }) => (
         }}
       >
         <div style={{ marginRight: rhythm(1 / 2) }}>
-          {node.image[0].resolutions.src && (
+          
             <Img
               style={{ margin: 0 }}
-              resolutions={node.image[0].resolutions}
+              resolutions="20px"
             />
-          )}
+
         </div>
-        <div style={{ flex: 1 }}>{node.productName.productName}</div>
+        <div style={{ flex: 1 }}></div>
       </div>
     </Link>
   </div>
@@ -70,7 +70,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    us: allMarkdownRemark(filter:  { frontmatter: { lang: "en" } }) {
+    us: allMarkdownRemark {
       edges {
         node {
           id
