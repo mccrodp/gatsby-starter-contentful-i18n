@@ -3,11 +3,12 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 
 export default ({ data }) => {
-  const post = data.markdownRemark
+  const post = data.allMarkdownRemark
+  console.log(post.edges);
   return (
-    <Layout>
+    <Layout data={this.props.data} location={this.props.location}>
       <div>
-        <h1>{post.frontmatter.title}</h1>
+
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </div>
     </Layout>
@@ -16,6 +17,14 @@ export default ({ data }) => {
 
 export const query = graphql`
 {
+  site {
+    siteMetadata {
+      languages {
+        defaultLangKey
+        langs
+      }
+    }
+  }
   allMarkdownRemark{
     edges{
       node{
@@ -24,6 +33,7 @@ export const query = graphql`
         }
         frontmatter{
           lang
+          title
         }
       }
 
