@@ -11,3 +11,4 @@ slug: /general
 ---
 
 Hello! ciao!
+Contenuto da "pagina general"...
