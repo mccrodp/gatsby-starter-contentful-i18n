@@ -5,12 +5,16 @@ import Img from "gatsby-image"
 import { rhythm } from "../utils/typography"
 
 import Layout from "../components/Layout"
+import Content, { HTMLContent } from "../components/Content"
 
 const propTypes = {
   data: PropTypes.object.isRequired,
 }
 
-const Product = ({ node }) => (
+const Product = ({ node, title, content, contentComponent }) => {
+  const PageContent = contentComponent || Content
+  return (
+
   <div>
     <Link
       style={{ color: `inherit`, textDecoration: `none` }}
@@ -25,6 +29,8 @@ const Product = ({ node }) => (
           marginBottom: rhythm(1 / 2),
         }}
       >
+      <PageContent className="content" content={content} />
+
         <div style={{ marginRight: rhythm(1 / 2) }}>
 
             <Img
@@ -38,9 +44,10 @@ const Product = ({ node }) => (
     </Link>
   </div>
 )
-
+}
 class IndexPage extends React.Component {
   render() {
+    console.log("inside index");
     var itProductEdges = [];
     if (this.props.data.italian !== null) {
       itProductEdges = this.props.data.italian.edges
@@ -50,7 +57,13 @@ class IndexPage extends React.Component {
         <div style={{ marginBottom: rhythm(2) }}>
           <h3>it</h3>
           {itProductEdges.map(({ node }, i) => (
-            <Product node={node} key={node.id} />
+
+            <Product
+            node={node}
+            contentComponent={HTMLContent}
+            title={node.frontmatter.title}
+            content={node.html}
+            key={node.id} />
           ))}
         </div>
       </Layout>
@@ -58,12 +71,17 @@ class IndexPage extends React.Component {
   }
 }
 
-IndexPage.propTypes = propTypes
+IndexPage.propTypes = {
+  content: PropTypes.string,
+  contentComponent: PropTypes.func,
+  title: PropTypes.string.isRequired,
+  propTypes,
+}
 
 export default IndexPage
 
 export const pageQuery = graphql`
-  query PageDeQuery {
+  query HomePageQuery {
     site {
       siteMetadata {
         languages {
@@ -76,10 +94,12 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          html
           fields {
             slug
           }
           frontmatter {
+            title
             tags
             templateKey
             nameSlug

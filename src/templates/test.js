@@ -5,6 +5,7 @@ import Layout from "../components/Layout"
 export default ({ data }) => {
   const post = data.allMarkdownRemark
   console.log(post.edges);
+  console.log("inside test");
   return (
     <Layout data={this.props.data} location={this.props.location}>
       <div>
