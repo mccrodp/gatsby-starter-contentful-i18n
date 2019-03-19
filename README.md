@@ -12,9 +12,7 @@ See [DEMO](https://gatsby-starter-contentful-i18n.netlify.com/).
 ## Quick Start
 First, create a new Gatsby site from the starter:
 
-```$ gatsby new my-fun-site https://github.com/cwlsn/gatsby-simple-contentful-starter```
-
-This starter will try to talk to a Contentful Model named homePage.
+```$ gatsby new my-fun-site https://github.com/mccrodp/gatsby-starter-contentful-i18n.git```
 
 From your project's root, make sure dependencies are installed and start the Gatsby development server.
 
