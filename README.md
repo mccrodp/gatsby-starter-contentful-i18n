@@ -8,3 +8,13 @@ To build on the [Using Contentful](https://github.com/gatsbyjs/gatsby/tree/maste
 Please take a look at the [issue queue](https://github.com/mccrodp/gatsby-contentful-i18n) to help out and feel free to submit PRs :)
 
 See [DEMO](https://gatsby-starter-contentful-i18n.netlify.com/).
+
+## Quick Start
+First, create a new Gatsby site from the starter:
+
+```$ gatsby new my-fun-site https://github.com/mccrodp/gatsby-starter-contentful-i18n.git```
+
+From your project's root, make sure dependencies are installed and start the Gatsby development server.
+
+```$ npm i```  
+```$ gatsby develop```
