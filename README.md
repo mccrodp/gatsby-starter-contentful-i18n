@@ -18,3 +18,9 @@ From your project's root, make sure dependencies are installed and start the Gat
 
 ```$ npm i```  
 ```$ gatsby develop```
+
+## Quick Deploy
+Want to deploy on [Netlify](https://netlify.com)?
+
+<!-- Markdown snippet -->
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/mccrodp/gatsby-starter-contentful-i18n)
