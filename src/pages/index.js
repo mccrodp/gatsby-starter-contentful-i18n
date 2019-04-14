@@ -17,6 +17,8 @@ class RedirectIndex extends React.PureComponent {
   }
 
   render() {
+    // It's recommended to add your SEO solution in here for bots
+    // eg. https://github.com/ahimsayogajp/ahimsayoga-gatsby/blob/master/src/pages/index.js#L22
     return (<div />);
   }
 }
